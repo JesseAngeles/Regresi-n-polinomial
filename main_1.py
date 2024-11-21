@@ -62,9 +62,8 @@ def polynomial_sgd(x_train, y_train, x_test, y_test, degree, iterations=10000, a
     # Generar características polinomiales
     poly = PolynomialFeatures(degree=degree, include_bias=True)
     x_train_poly = poly.fit_transform(x_train)
-    x_test_poly = poly.fit_transform(x_test)  # Cambiado a transform
+    x_test_poly = poly.fit_transform(x_test)  
 
-    # Configurar y entrenar modelo SGD
     model = SGDRegressor(
         max_iter=iterations,
         alpha=alfa,
@@ -81,7 +80,7 @@ def polynomial_sgd(x_train, y_train, x_test, y_test, degree, iterations=10000, a
     r2 = model.score(x_test_poly, y_test)
     mse = mean_squared_error(y_test, y_pred)
 
-    sorted_indices = x_test.ravel().argsort()  # Ordenar x_test y usar los índices
+    sorted_indices = x_test.ravel().argsort() 
     x_test_sorted = x_test[sorted_indices]
     y_test_sorted = y_test[sorted_indices]
     y_pred_sorted = y_pred[sorted_indices]
@@ -89,7 +88,6 @@ def polynomial_sgd(x_train, y_train, x_test, y_test, degree, iterations=10000, a
     plt.scatter(x_test_sorted, y_test_sorted, color='red', label='Puntos reales')
     plt.plot(x_test_sorted, y_pred_sorted, color='blue', label=f'Polinomio grado {degree}')
     
-    # Personalización de la gráfica
     plt.title(f'Regresión Polinomial de grado {degree}')
     plt.xlabel('X')
     plt.ylabel('Y')
@@ -102,7 +100,7 @@ def polynomial_sgd(x_train, y_train, x_test, y_test, degree, iterations=10000, a
 # Leer csv
 df = pd.read_csv('resources/datos.csv')
 
-x = df['x'].values.reshape(-1, 1)  # Convertir a 2D
+x = df['x'].values.reshape(-1, 1)
 y = df['y'].values
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=0)

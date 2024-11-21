@@ -13,13 +13,13 @@ def polynomial_ols(x_train, y_train, x_test, y_test, degree, scaler = None):
     # Crear características polinomiales
     poly = PolynomialFeatures(degree=degree)
     x_train_poly = poly.fit_transform(x_train)
-    x_test_poly = poly.fit_transform(x_test)  # Cambiado a transform para evitar fugas
+    x_test_poly = poly.fit_transform(x_test) 
     
     
     if scaler == 1:
         scaler = StandardScaler()
         x_train_poly = scaler.fit_transform(x_train_poly)
-        x_test_poly = scaler.fit_transform(x_test_poly)  # Cambiado a transform para consistencia
+        x_test_poly = scaler.fit_transform(x_test_poly) 
     elif scaler == 2:
         scaler = RobustScaler()
         x_train_poly = scaler.fit_transform(x_train_poly)
